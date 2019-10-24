@@ -1,4 +1,4 @@
-# Coordinator, MVVM with Combine API from iOS13
+# Work in progress - Coordinator, MVVM with Combine API from iOS13
 
 ##Description
 This project exemplifies simple signup and search features in a demonstration app. 
