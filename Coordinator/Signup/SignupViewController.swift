@@ -31,6 +31,9 @@ class SignupViewController: UIViewController {
     private var combine: AnyCancellable?
     private var emailSubscriber: AnyCancellable?
     private var passwordSubscriber: AnyCancellable?
+    private var emailFieldSubscriber: AnyCancellable?
+    private var passwordFieldSubscriber: AnyCancellable?
+
     
     weak var delegate: SignupViewControllerDelegate?
     
@@ -46,13 +49,13 @@ class SignupViewController: UIViewController {
     }
     
     private func setupTextFieldListeners() {
-        _ = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: passwordField)
+        passwordFieldSubscriber = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: passwordField)
         .compactMap{ ($0.object as? UITextField)?.text }
         .debounce(for: 0.1, scheduler: RunLoop.main)
         .removeDuplicates()
         .assign(to: \InputViewModel.text, on: passwordFieldVideModel)
         
-        _ = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: emailField)
+        emailFieldSubscriber = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: emailField)
         .compactMap{ ($0.object as? UITextField)?.text }
         .debounce(for: 0.1, scheduler: RunLoop.main)
         .removeDuplicates()
@@ -78,7 +81,7 @@ class SignupViewController: UIViewController {
     }
     
     @IBAction private func didPressSignup(_ sender: Any) {
-        //print("login")
+        delegate?.signup(with: emailFieldVideModel.text, password: passwordFieldVideModel.text)
     }
     
     @objc private func keyboardWillShow(notification:NSNotification){

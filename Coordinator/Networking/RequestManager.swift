@@ -24,7 +24,7 @@ enum route {
     var path: URL  {
         switch self {
         case .signup(_, _):
-            return URL(string: "")!
+            return URL(string: "http://www.mocky.io/v2/5e3434423000008245d96381?mocky-delay=1000ms")!
         case .search(_):
             return URL(string: "")!
         }
@@ -52,13 +52,14 @@ protocol NetworkingProvider {
  
 class RequestManager: NetworkingProvider {
 private let session: UrlSessionProvider!
+    private var cancellableRequest: AnyCancellable?
     
     required init(with session: UrlSessionProvider = URLSession(configuration: .default) ) {
         self.session = session
     }
 
     func request<T: Codable>(route: route, result: @escaping (Result<T, Error>) -> ()) {
-        _ = session.request(for: route.path)
+        cancellableRequest = session.request(for: route.path)
             .decode(type: T.self, decoder: JSONDecoder())
             .sink(receiveCompletion: { completion in
                 switch completion {

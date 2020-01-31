@@ -20,15 +20,18 @@ enum Steps: String {
 
 protocol Coordinating {
     func start()
-    init(with navigationController: UINavigationController)
+    init(with navigationController: UINavigationController, requestManager: NetworkingProvider)
 }
 
 class Coordinator: Coordinating {
     
     private unowned let navigationController: UINavigationController
+    private var searchViewController: SearchViewController?
+    private let requestManager: NetworkingProvider
     
-    required init(with navigationController: UINavigationController) {
+    required init(with navigationController: UINavigationController, requestManager: NetworkingProvider) {
         self.navigationController = navigationController
+        self.requestManager = requestManager
     }
     
     func start() {
@@ -40,6 +43,22 @@ class Coordinator: Coordinating {
 
 extension Coordinator: SignupViewControllerDelegate {
     func signup(with email: String, password: String) {
-        //WIP coordinate buttonModel state, send request via NetowrkingManger
+        requestManager.request(route: .signup(email: email, password: password)) { [weak self] ( result: Result<AppSession, Error>) in
+            switch result {
+            case .success(_):
+                self?.searchViewController = Steps.search.viewController as? SearchViewController
+                guard let searchViewController = self?.searchViewController else { return }
+                searchViewController.delegate = self
+                self?.navigationController.pushViewController(searchViewController, animated: true)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+
+extension Coordinator: SearchViewControllerDelegate {
+    func search(text: String) {
+            
     }
 }

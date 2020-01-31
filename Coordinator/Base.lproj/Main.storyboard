@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -134,12 +134,65 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="yym-VC-oDe">
+            <objects>
+                <viewController id="MsI-Ol-qlO" customClass="SearchViewController" customModule="Coordinator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SJl-io-gzi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DM1-jA-7yH">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dQg-bV-RTx">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="OB8-4H-CWO"/>
+                                        </constraints>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bp4-bL-j1b">
+                                        <rect key="frame" x="0.0" y="41" width="414" height="774"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="Bp4-bL-j1b" firstAttribute="leading" secondItem="DM1-jA-7yH" secondAttribute="leading" id="6d8-nw-8nf"/>
+                                    <constraint firstItem="Bp4-bL-j1b" firstAttribute="top" secondItem="dQg-bV-RTx" secondAttribute="bottom" symbolic="YES" id="921-F4-MZd"/>
+                                    <constraint firstItem="dQg-bV-RTx" firstAttribute="leading" secondItem="DM1-jA-7yH" secondAttribute="leading" id="UCX-9u-kcs"/>
+                                    <constraint firstItem="dQg-bV-RTx" firstAttribute="top" secondItem="DM1-jA-7yH" secondAttribute="top" id="ZBB-Km-aDT"/>
+                                    <constraint firstAttribute="trailing" secondItem="dQg-bV-RTx" secondAttribute="trailing" id="dGl-Pv-ODE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Bp4-bL-j1b" secondAttribute="bottom" id="m9j-Sg-IlU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bp4-bL-j1b" secondAttribute="trailing" id="xB2-ho-lMz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="sYi-uU-RVO" firstAttribute="trailing" secondItem="DM1-jA-7yH" secondAttribute="trailing" id="HtC-nk-JUe"/>
+                            <constraint firstItem="DM1-jA-7yH" firstAttribute="top" secondItem="sYi-uU-RVO" secondAttribute="top" id="QIk-f4-46j"/>
+                            <constraint firstItem="DM1-jA-7yH" firstAttribute="leading" secondItem="sYi-uU-RVO" secondAttribute="leading" id="r2A-dD-749"/>
+                            <constraint firstItem="sYi-uU-RVO" firstAttribute="bottom" secondItem="DM1-jA-7yH" secondAttribute="bottom" id="rXD-AN-s5X"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sYi-uU-RVO"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="dQg-bV-RTx" id="Lk0-rS-5wv"/>
+                        <outlet property="tableView" destination="Bp4-bL-j1b" id="yJv-W0-pQR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U5Q-SL-x2F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1018.840579710145" y="34.821428571428569"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkmark.circle" catalog="system" width="64" height="60"/>
         <image name="person.3" catalog="system" width="72" height="35"/>
         <namedColor name="button-background">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.85000002384185791" green="0.5429999828338623" blue="0.17100000381469727" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
